@@ -1,0 +1,11 @@
+.Table {
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHElEQVQoU2NkIA78ZyROHcOoQrwBBQ6e/8SEJQBmbwoBlDNtsgAAAABJRU5ErkJggg==) repeat;
+    width:100vw;
+    height:100vh;
+}
+
+.Table p {
+    user-select:none;
+    color:#FFF;
+    background:#000B
+}
