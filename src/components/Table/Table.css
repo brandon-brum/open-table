@@ -1,11 +1,21 @@
-.Table {
+.Table .Surface {
     background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHElEQVQoU2NkIA78ZyROHcOoQrwBBQ6e/8SEJQBmbwoBlDNtsgAAAABJRU5ErkJggg==) repeat;
-    width:100vw;
-    height:100vh;
+    width:200px;
+    height:200px;
+    overflow:hidden;
 }
 
-.Table p {
+.Table {
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+p {
     user-select:none;
     color:#FFF;
-    background:#000B
+    background:#000F;
+    position:fixed;
+    left:50vw;
+    transform:translate(-50%,0)
 }

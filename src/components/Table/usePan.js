@@ -1,4 +1,4 @@
-// usePan.js - Hook for panning around a react element.
+// usePan.js - Hook for panning around a React element.
 
 import {
     useCallback, useRef, useState
