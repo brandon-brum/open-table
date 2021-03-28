@@ -5,15 +5,15 @@ import {
 } from 'react';
 
 function useMouseCoordinates() {
-    const [mousePosition,setMousePosition] = useState({x:0,y:0});
+    const mousePosition = useRef({x:0,y:0});
 
     const onMouseMove = useCallback(
         event => {
-            setMousePosition({x:event.clientX,y:event.clientY})
+            mousePosition.current = {x:event.pageX,y:event.pageY}
         }
     );
 
-    return [mousePosition,onMouseMove];
+    return [mousePosition.current,onMouseMove];
 }
 
 export default useMouseCoordinates;
