@@ -15,13 +15,13 @@ function Table(props) {
     return (
         <>
         <p>{JSON.stringify({position:position,scale:scale})}</p>
-        <div className='Table' onMouseDown={events.onPanStart} onWheel={events.onZoomWheel} >
+        <div className='Table' onMouseDown={events.onPanStart} onWheel={events.onWheelZoom} >
             <div className='Surface' style={{
                 transform:`scale(${transform.scale})`,
                 position:'absolute',
                 left:`${-position.x}px`,
                 top:`${position.y}px`,
-                transformOrigin:`${position.x + (1920/2)}px ${-position.y + (630/2)}px`,
+                transformOrigin:`top left`,
                 backgroundSize:`${1/scale}`
             }}>
                 {props.children}

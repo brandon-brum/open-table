@@ -59,11 +59,21 @@ function usePanZoom(assignedOptions) {
 
     panZoomEvents.onWheelZoom = useCallback(
         event => {
-            console.log('zoom')
+            let oldScale = transform.scale
+            let newScale = Math.min(options.zoomLimit.max, Math.max(options.zoomLimit.min, Math.round(10 * (transform.scale + (event.deltaY * -0.001)))/10))
+            console.log()
+            let newPosition = {...transform.position};
+            let mousePosition = {x:event.clientX + transform.position.x,y:event.clientY + transform.position.y};
+            console.log(mousePosition)
+            
+            //newPosition.x *= newScale - oldScale;
+            //newPosition.y *= newScale - oldScale;
+            
+            
             setTransform(transform => {
                 return {
-                    scale:Math.min(options.zoom.max, Math.max(options.zoom.min, Math.round(10 * (transform.scale + (event.deltaY * -0.001)))/10)),
-                    position:transform.position
+                    scale:newScale,
+                    position:newPosition
                 }
             })
         },
