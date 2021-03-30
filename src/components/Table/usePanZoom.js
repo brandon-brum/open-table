@@ -34,7 +34,7 @@ function usePanZoom(assignedOptions) {
             const offset = {x:lastPoint.x - point.x, y:lastPoint.y - point.y};
             setTransform({position:{x:transform.position.x + offset.x, y:transform.position.y - offset.y},scale:transform.scale});
         },
-    [setTransform, transform.position]);
+    [setTransform, transform]);
     
     panZoomEvents.onPanEnd = useCallback(
         event => {
@@ -51,25 +51,19 @@ function usePanZoom(assignedOptions) {
         },
     [panZoomEvents.onPanMove,panZoomEvents.onPanEnd]);
 
-    //const [scale,setScale] = useState(1);
-    //const MIN_ZOOM = 0.1
-    //const MAX_ZOOM = 4
-
-    //const panLastPoint = useRef({x:0,y:0});
-
     panZoomEvents.onWheelZoom = useCallback(
         event => {
-            let oldScale = transform.scale
-            let newScale = Math.min(options.zoomLimit.max, Math.max(options.zoomLimit.min, Math.round(10 * (transform.scale + (event.deltaY * -0.001)))/10))
-            console.log()
+            let oldScale = transform.scale;
+            let newScale = Math.min(options.zoomLimit.max, Math.max(options.zoomLimit.min, Math.round(10 * (transform.scale + (event.deltaY * -0.001)))/10));    
             let newPosition = {...transform.position};
-            let mousePosition = {x:event.clientX + transform.position.x,y:event.clientY + transform.position.y};
-            console.log(mousePosition)
+
+            newPosition = {x:newPosition.x + (event.clientX), y:newPosition.y - (event.clientY)}
             
-            //newPosition.x *= newScale - oldScale;
-            //newPosition.y *= newScale - oldScale;
+            newPosition.x *= newScale / oldScale;
+            newPosition.y *= newScale / oldScale;
             
-            
+            newPosition = {x:newPosition.x - (event.clientX), y:newPosition.y + (event.clientY)}
+
             setTransform(transform => {
                 return {
                     scale:newScale,

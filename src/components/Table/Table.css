@@ -1,7 +1,7 @@
 .Table .Surface {
-    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHElEQVQoU2NkIA78ZyROHcOoQrwBBQ6e/8SEJQBmbwoBlDNtsgAAAABJRU5ErkJggg==) repeat;
-    width:200px;
-    height:200px;
+    background:linear-gradient(#AAAA,#AAAA), url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHElEQVQoU2NkIA78ZyROHcOoQrwBBQ6e/8SEJQBmbwoBlDNtsgAAAABJRU5ErkJggg==) repeat;
+    width:1000px;
+    height:1000px;
     overflow:hidden;
 }
 
@@ -9,6 +9,7 @@
     width:100vw;
     height:100vh;
     overflow:hidden;
+    background:#222;
 }
 
 p {

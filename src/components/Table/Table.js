@@ -14,7 +14,7 @@ function Table(props) {
 
     return (
         <>
-        <p>{JSON.stringify({position:position,scale:scale})}</p>
+        <p>{`x: ${position.x.toFixed(0)} y: ${position.y.toFixed(0)} scale: ${scale}`}</p>
         <div className='Table' onMouseDown={events.onPanStart} onWheel={events.onWheelZoom} >
             <div className='Surface' style={{
                 transform:`scale(${transform.scale})`,
