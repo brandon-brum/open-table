@@ -12,11 +12,11 @@
     background:#222;
 }
 
-p {
+#debug {
     user-select:none;
     color:#FFF;
     background:#000F;
-    position:fixed;
+    position:absolute;
     left:50vw;
     transform:translate(-50%,0)
 }

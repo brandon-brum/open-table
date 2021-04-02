@@ -1,9 +1,6 @@
 // usePanZoom.js - Hook for defining panning and zooming logic.
 
-import {
-    useCallback, useEffect, useRef, useState
-} from 'react';
-import useMouseCoordinates from './useMouseCoordinates';
+import { useCallback, useRef, useState } from "react";
 
 const defaultOptions = {
     panLimit: {min:-Infinity, max:Infinity},
@@ -11,21 +8,13 @@ const defaultOptions = {
 }
 
 function usePanZoom(assignedOptions) {
-    const options = {...defaultOptions, ...assignedOptions}
+    const options = {...defaultOptions, ...assignedOptions};
 
-    let panZoomEvents = {}
+    let panZoomEvents = {};
 
-    const [transform,setTransform] = useState({position:{x:0,y:0}, scale:1})
+    const [transform,setTransform] = useState({position:{x:0,y:0}, scale:1});
 
     const panLastPoint = useRef({x:0,y:0});
-    
-    const mousePosition = useRef({x:0,y:0});
-
-    panZoomEvents.onMouseMove = useCallback(
-        event => {
-            mousePosition.current = {x:event.pageX,y:event.pageY}
-        }
-    );
 
     panZoomEvents.onPanMove = useCallback(
         event => {
@@ -38,16 +27,16 @@ function usePanZoom(assignedOptions) {
     
     panZoomEvents.onPanEnd = useCallback(
         event => {
-            document.removeEventListener('mousemove', panZoomEvents.onPanMove);
-            document.removeEventListener('mouseup', panZoomEvents.onPanEnd);
+            document.removeEventListener("mousemove", panZoomEvents.onPanMove);
+            document.removeEventListener("mouseup", panZoomEvents.onPanEnd);
         },
     [panZoomEvents.onPanMove]);
     
     panZoomEvents.onPanStart = useCallback(
         event => {
-            document.addEventListener('mousemove', panZoomEvents.onPanMove);
-            document.addEventListener('mouseup', panZoomEvents.onPanEnd);
-            panLastPoint.current = {x:event.pageX, y:event.pageY}
+            document.addEventListener("mousemove", panZoomEvents.onPanMove);
+            document.addEventListener("mouseup", panZoomEvents.onPanEnd);
+            panLastPoint.current = {x:event.pageX, y:event.pageY};
         },
     [panZoomEvents.onPanMove,panZoomEvents.onPanEnd]);
 
@@ -57,23 +46,23 @@ function usePanZoom(assignedOptions) {
             let newScale = Math.min(options.zoomLimit.max, Math.max(options.zoomLimit.min, Math.round(10 * (transform.scale + (event.deltaY * -0.001)))/10));    
             let newPosition = {...transform.position};
 
-            newPosition = {x:newPosition.x + (event.clientX), y:newPosition.y - (event.clientY)}
+            newPosition = {x:newPosition.x + (event.clientX), y:newPosition.y - (event.clientY)};
             
             newPosition.x *= newScale / oldScale;
             newPosition.y *= newScale / oldScale;
             
-            newPosition = {x:newPosition.x - (event.clientX), y:newPosition.y + (event.clientY)}
+            newPosition = {x:newPosition.x - (event.clientX), y:newPosition.y + (event.clientY)};
 
             setTransform(transform => {
                 return {
                     scale:newScale,
                     position:newPosition
-                }
-            })
+                };
+            });
         },
     [setTransform, transform]);
 
-    return [transform, panZoomEvents]
+    return [transform, panZoomEvents];
 }
 
-export default usePanZoom
+export default usePanZoom;

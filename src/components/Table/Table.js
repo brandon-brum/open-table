@@ -1,11 +1,8 @@
 // Table.js - Container for Objects and tardisTables, also contains zooming and panning logic.
 
-import { useRef, useCallback, useState } from "react";
-import usePanZoom from './usePanZoom.js';
-import useZoom from './useZoom.js';
-import useMouseCoordinates from './useMouseCoordinates.js';
+import usePanZoom from "./usePanZoom.js";
 
-import './Table.css';
+import "./Table.css";
 
 function Table(props) {
     const [transform, events] = usePanZoom()
@@ -14,11 +11,11 @@ function Table(props) {
 
     return (
         <>
-        <p>{`x: ${position.x.toFixed(0)} y: ${position.y.toFixed(0)} scale: ${scale}`}</p>
-        <div className='Table' onMouseDown={events.onPanStart} onWheel={events.onWheelZoom} >
-            <div className='Surface' style={{
+        
+        <div className="Table" onMouseDown={events.onPanStart} onWheel={events.onWheelZoom} >
+            <div className="Surface" style={{
                 transform:`scale(${transform.scale})`,
-                position:'absolute',
+                position:"absolute",
                 left:`${-position.x}px`,
                 top:`${position.y}px`,
                 transformOrigin:`top left`,
@@ -27,6 +24,7 @@ function Table(props) {
                 {props.children}
             </div>
         </div>
+        <p id="debug">{`x: ${position.x.toFixed(0)} y: ${position.y.toFixed(0)} scale: ${scale}`}</p>
         </>
     );
 };
