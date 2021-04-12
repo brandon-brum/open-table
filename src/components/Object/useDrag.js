@@ -4,21 +4,20 @@
 
 import { useCallback, useRef, useState } from "react";
 
-function useDrag(permitted=true) {
-    const dragLastPoint = useRef({x:0,y:0});
+function useDrag() {
+    const dragLastPoint = useRef({x:5,y:0});
 
     const dragEvents = {};
-    let offset = {x:0,y:0}
+    const offset = useRef({x:0,y:0})
 
     dragEvents.onDragMove = useCallback(
         event => {
             const lastPoint = dragLastPoint.current;
             const point = {x:event.pageX, y:event.pageY};
-            offset = {x:lastPoint.x - point.x, y:lastPoint.y - point.y};
-            console.log('new offset:',offset)
+            if (lastPoint.x - point.x != 0) offset.current = {x:lastPoint.x - point.x, y:lastPoint.y - point.y};
             dragLastPoint.current = {x:event.pageX, y:event.pageY};
         },
-    []);
+    [offset, dragLastPoint]);
     
     dragEvents.onDragEnd = useCallback(
         event => {
@@ -29,14 +28,13 @@ function useDrag(permitted=true) {
     
     dragEvents.onDragStart = useCallback(
         event => {
-            if (!permitted) return
             document.addEventListener("mousemove", dragEvents.onDragMove);
             document.addEventListener("mouseup", dragEvents.onDragEnd);
             dragLastPoint.current = {x:event.pageX, y:event.pageY};
         },
     [dragEvents.onDragMove,dragEvents.onDragEnd]);
 
-    return [offset, dragEvents];
+    return [offset.current, dragEvents];
 };
 
 export default useDrag;

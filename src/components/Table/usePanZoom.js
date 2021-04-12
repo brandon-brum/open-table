@@ -30,7 +30,7 @@ function usePanZoom(assignedOptions) {
             document.removeEventListener("mousemove", panZoomEvents.onPanMove);
             document.removeEventListener("mouseup", panZoomEvents.onPanEnd);
         },
-    [panZoomEvents.onPanMove]);
+    [panZoomEvents.onPanMove, panZoomEvents.onPanEnd]);
     
     panZoomEvents.onPanStart = useCallback(
         event => {
@@ -60,7 +60,7 @@ function usePanZoom(assignedOptions) {
                 };
             });
         },
-    [setTransform, transform]);
+    [setTransform, transform, options.zoomLimit]);
 
     return [transform, panZoomEvents];
 }
