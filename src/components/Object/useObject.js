@@ -9,7 +9,7 @@ function useObject() {
     // CREATE AN ISOLATED CASE OF THE BUG
 
 
-    const [transform,setTransform] = useState({x:0,y:0,z:0});
+    const [transform,setTransform] = useState({x:20,y:20,z:0});
 
     const [dragOffset, dragEvents] = useDrag();
 
@@ -18,10 +18,16 @@ function useObject() {
     objectEvents.onMouseDrag = event => {
         dragEvents.onDragMove(event)
         setTransform(transform => {
-            
-            transform.x += dragOffset.x;
-            transform.y += dragOffset.y;
-            return transform;
+            console.log({
+                x:event.pageX,
+                y:event.pageY,
+                z:transform.z
+            })
+            return {
+                x:event.pageX,
+                y:event.pageY,
+                z:transform.z
+            }
         });
     }
 

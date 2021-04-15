@@ -14,7 +14,8 @@ function Token() {
             <img src={testImage} onMouseDown={objectEvents.onMouseDown} draggable={false} alt="" style={{
                 position:"absolute",
                 left:`${transform.x}px`,
-                right:`${transform.y}px`
+                top:`${transform.y}px`,
+                transform:`translate(-50%,-50%)`
             }}/>
         </>
     );
