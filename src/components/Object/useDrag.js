@@ -14,7 +14,7 @@ function useDrag() {
         event => {
             const lastPoint = dragLastPoint.current;
             const point = {x:event.pageX, y:event.pageY};
-            if (lastPoint.x - point.x != 0) offset.current = {x:lastPoint.x - point.x, y:lastPoint.y - point.y};
+            if (lastPoint.x - point.x !== 0) offset.current = {x:lastPoint.x - point.x, y:lastPoint.y - point.y};
             dragLastPoint.current = {x:event.pageX, y:event.pageY};
         },
     [offset, dragLastPoint]);

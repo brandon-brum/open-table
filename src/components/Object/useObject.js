@@ -15,32 +15,27 @@ function useObject() {
 
     const objectEvents = {};
 
-    objectEvents.onMouseDrag = useCallback( event => {
+    objectEvents.onMouseDrag = event => {
         dragEvents.onDragMove(event)
         setTransform(transform => {
             
-            transform.x += dragOffset.x + 10;
-            transform.y += dragOffset.y + 10;
-            console.log(transform)
+            transform.x += dragOffset.x;
+            transform.y += dragOffset.y;
             return transform;
         });
-    }, []);
+    }
 
-    objectEvents.onMouseUp = useCallback( event => {
+    objectEvents.onMouseUp = event => {
         document.removeEventListener('mousemove', objectEvents.onMouseDrag);
         document.removeEventListener('mouseup', objectEvents.onMouseUp);
-    }, [objectEvents.onMouseDrag, objectEvents.onMouseUp])
+    }
 
-    objectEvents.onMouseDown = useCallback( event => {
+    objectEvents.onMouseDown =  event => {
         document.addEventListener('mousemove', objectEvents.onMouseDrag);
         document.addEventListener('mouseup', objectEvents.onMouseUp)
         dragEvents.onDragStart(event);
         event.stopPropagation();
-    }, [objectEvents.onMouseDrag, objectEvents.onMouseUp, dragEvents]);
-
-    useEffect( () => {
-        console.log('render')
-    }, [])
+    }
 
     const objectMethods = {};
 
