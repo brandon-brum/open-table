@@ -19,8 +19,8 @@ function useObject() {
         dragEvents.onDragMove(event)
         setTransform(transform => {
             console.log({
-                x:event.pageX,
-                y:event.pageY,
+                x:event.clientX,
+                y:event.clientY,
                 z:transform.z
             })
             return {
